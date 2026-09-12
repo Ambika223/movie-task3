@@ -138,6 +138,8 @@ body::after {
     left: 30%;
     width: 45%;
     display: none;
+    max-height: 90vh;
+    overflow-y: auto;
 
 }
 

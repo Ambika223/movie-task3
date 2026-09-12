@@ -17,35 +17,35 @@ const updateMovieBtn = document.getElementById('updateMovieBtn');
 const cancelMovieBtn = document.getElementById('cancelMovieBtn');
 
 
-const Movies = [
-  {
-    movieName: "Gentleman",
-    movieImage:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcud2HxVXn2s1r31YlKA22cb8k9amsBjna-nbZyKBiU_o2ySK9Rkpffvo&s=10",
-    movieDescription:
-      "The Gentleman Hindi dubbed movie (originally a Kannada action-thriller titled Gentleman) tells the story of Bharath, a man who suffers from a rare medical condition known as sleeping beauty syndrome. [1] (https://www.zee5.com/movies/details/gentlemen/0-0-1z575264), [2] (https://www.youtube.com/watch?v=2oFxPlt5n_s)",
-    movieRating: 5,
-    id: "5",
-  },
-  {
-    movieName: "Leo",
-    movieImage:
-      "https://m.media-amazon.com/images/M/MV5BMDk5ODNjNzMtYzI5Yy00NmI3LWIwYzctMTFjZjcwN2I2Yzk2XkEyXkFqcGc@._V1_.jpg",
-    movieDescription:
-      "A Tamil action thriller starring Vijay, directed by Lokesh Kanagaraj.",
-    movieRating: 4,
-    id: "6",
-  },
-  {
-    movieName: "Pushpa 2",
-    movieImage:
-      "https://img.nowrunning.com/content/movie/2023/pushp-27946/bg8-pushpa-2.jpg",
-    movieDescription:
-      "An action-packed Telugu drama starring Allu Arjun, continuing the story of Pushpa Raj.",
-    movieRating: 5,
-    id: "7",
-  },
-];
+// const Movies = [
+//   {
+//     movieName: "Gentleman",
+//     movieImage:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcud2HxVXn2s1r31YlKA22cb8k9amsBjna-nbZyKBiU_o2ySK9Rkpffvo&s=10",
+//     movieDescription:
+//       "The Gentleman Hindi dubbed movie (originally a Kannada action-thriller titled Gentleman) tells the story of Bharath, a man who suffers from a rare medical condition known as sleeping beauty syndrome. [1] (https://www.zee5.com/movies/details/gentlemen/0-0-1z575264), [2] (https://www.youtube.com/watch?v=2oFxPlt5n_s)",
+//     movieRating: 5,
+//     id: "5",
+//   },
+//   {
+//     movieName: "Leo",
+//     movieImage:
+//       "https://m.media-amazon.com/images/M/MV5BMDk5ODNjNzMtYzI5Yy00NmI3LWIwYzctMTFjZjcwN2I2Yzk2XkEyXkFqcGc@._V1_.jpg",
+//     movieDescription:
+//       "A Tamil action thriller starring Vijay, directed by Lokesh Kanagaraj.",
+//     movieRating: 4,
+//     id: "6",
+//   },
+//   {
+//     movieName: "Pushpa 2",
+//     movieImage:
+//       "https://img.nowrunning.com/content/movie/2023/pushp-27946/bg8-pushpa-2.jpg",
+//     movieDescription:
+//       "An action-packed Telugu drama starring Allu Arjun, continuing the story of Pushpa Raj.",
+//     movieRating: 5,
+//     id: "7",
+//   },
+// ];
 
 // localStorage.setItem("moviesArr", JSON.stringify(Movies));
 
@@ -123,18 +123,17 @@ function createMovieCards(arr) {
   movieContainer.innerHTML = res;
 
 }
-
 createMovieCards(moviesArr);
+
 function onModalToggle() {
   movieModel.classList.toggle('active');
   backDrop.classList.toggle('active');
   movieForm.reset();
 }
 
-
-showMovieBtn.addEventListener('click', onModalToggle);
+// showMovieBtn.addEventListener('click', onModalToggle);
 closeMovieModal.forEach(ele => {
-  ele.addEventListener("click", onModalToggle)
+  ele.addEventListener("click", onCancelHandler);
 })
 
 //CREATE
@@ -254,8 +253,17 @@ function onDeleteHandler(ele) {
   }
 }
 
-
+//Cancel
+function onCancelHandler() {
+  movieForm.reset();
+  addMovieBtn.classList.remove('d-none');
+  updateMovieBtn.classList.add('d-none');
+  localStorage.removeItem("updateId");
+  movieModel.classList.remove('active');
+  backDrop.classList.remove('active');
+}
 
 movieForm.addEventListener("submit", onMovieAdd);
 updateMovieBtn.addEventListener("click", onMovieUpdateHandler);
-cancelMovieBtn.addEventListener("click", onModalToggle);
+showMovieBtn.addEventListener('click', onModalToggle);
+cancelMovieBtn.addEventListener("click", onCancelHandler);
