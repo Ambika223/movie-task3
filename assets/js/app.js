@@ -51,7 +51,7 @@ const cancelMovieBtn = document.getElementById('cancelMovieBtn');
 
 let movieData = localStorage.getItem('moviesArr');
 
-let moviesArr = [];
+let moviesArr;
 
 if (movieData) {
   moviesArr = JSON.parse(movieData);
