@@ -250,19 +250,33 @@ function onMovieUpdateHandler() {
 function onDeleteHandler(ele) {
   const deleteId = ele.closest(".movieCard").id;
 
-  const isConfirm = confirm(
-    `Are you sure you want to delete movie with id : ${deleteId}?`);
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
 
-  if (isConfirm) {
-    const deleteIndex = moviesArr.findIndex((movie) => movie.id === deleteId);
-    moviesArr.splice(deleteIndex, 1);
-    localStorage.setItem("moviesArr", JSON.stringify(moviesArr));
-    // Refresh UI
-    createMovieCards(moviesArr);
-    snackBar(
-      `Movie with id : ${deleteId} deleted successfully.`
-    );
-  }
+      const deleteIndex = moviesArr.findIndex((movie) => movie.id === deleteId);
+      moviesArr.splice(deleteIndex, 1);
+      localStorage.setItem("moviesArr", JSON.stringify(moviesArr));
+      // Refresh UI
+      createMovieCards(moviesArr);
+      snackBar(
+        `Movie with id : ${deleteId} deleted successfully.`
+      );
+    }
+  });
+
+  // const isConfirm = confirm(
+  //   `Are you sure you want to delete movie with id : ${deleteId}?`);
+
+
+
 }
 
 //Cancel
